@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  api: "https://parstile/api/",
-  serviceStaticPath: "https://parstile/images/products/"
+  api: "https://parstile.ru/api/",
+  serviceStaticPath: "https://parstile.ru/images/products/"
 };
