@@ -1,0 +1,104 @@
+<div class="detail" *ngIf="product">
+  <div class="container">
+
+    <div class="detail-title">
+      {{product.name}}
+    </div>
+
+    <div class="detail-product">
+      <div class="detail-image" style="background-image: url({{staticServicePath + product.image}})"></div>
+
+      <div class="detail-info">
+        <div class="detail-info-items">
+          <div class="detail-info-item" *ngIf="product.desc">
+            <div class="detail-info-item-kind" *ngIf="product.kind"> <span>Тип: {{product.kind}}</span><br></div>
+            <div class="detail-info-item-code"><span>Код товара:</span> {{product.code}}</div>
+            <div class="detail-info-item-maker"><span>Производитель:</span> {{product.maker}}</div>
+            <div class="detail-info-item-country"><span>Страна:</span> {{product.country}}</div>
+            <div class="detail-info-item-size"><span>Размер:</span> {{product.size}}</div>
+            <div class="detail-info-item-surface"><span>Поверхность:</span> {{product.surface}}</div>
+            <div class="detail-info-item-color"><span>Цвет:</span> {{product.color}}</div>
+            <div class="detail-info-item-use"><span>Применение:</span> {{product.use}}</div>
+            <div class="detail-info-item-picture"><span>Рисунок:</span> {{product.pic_face}}</div>
+            <div class="detail-info-item-form"><span>Геометрическая форма:</span> {{product.form}}</div>
+            <div class="detail-info-item-material"><span>Материал:</span> {{product.material}}</div>
+            <div class="detail-info-item-property"><span>Свойства:</span> {{product.property}}</div>
+            <div class="detail-info-item-collection"><span></span></div>
+            <div class="detail-info-item-discount" ><span></span>Скидка от цены на сайте: {{product.discount}}%</div>
+
+            <div class="detail-info-item-inbox" ><span>В коробке:</span> {{product.inbox}}</div>
+            <div class="detail-info-item-weight" ><span>Вес коробки:</span> {{product.weight}}</div>
+
+
+
+          </div>
+
+        </div>
+        <div class="detail-info-params">
+          <div class="detail-info-params-count">
+            <span class="desktop">Количество:</span>
+            <span class="mobile">Кол...</span>
+            <count-selector [count]="count" (onCountChange)="updateCount($event)"> </count-selector>
+          </div>
+          <div class="detail-info-params-price">
+            {{product.discount ? (product.price * (1 - product.discount / 100)) : product.price| currency}}
+          </div>
+        </div>
+        <div class="detail-info-actions">
+          <button class="button button-transparent button-icon" (click)="updateFavorite()">
+            <svg *ngIf="product.isInFavorite" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 14.3628C7.7693 14.3628 7.54605 14.333 7.36 14.266C4.51721 13.2912 0 9.8307 0 4.71814C0 2.11349 2.10605 0 4.69581 0C5.95349 0 7.1293 0.491163 8 1.3693C8.8707 0.491163 10.0465 0 11.3042 0C13.894 0 16 2.12093 16 4.71814C16 9.83814 11.4828 13.2912 8.64 14.266C8.45395 14.333 8.2307 14.3628 8 14.3628Z" fill="#f1600f"/>
+            </svg>
+
+            <svg *ngIf="!product.isInFavorite" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M8.5 14.6814C8.2693 14.6814 8.04605 14.6516 7.86 14.5846C5.01721 13.6098 0.5 10.1493 0.5 5.03674C0.5 2.43209 2.60605 0.318604 5.19581 0.318604C6.45349 0.318604 7.6293 0.809766 8.5 1.68791C9.3707 0.809766 10.5465 0.318604 11.8042 0.318604C14.394 0.318604 16.5 2.43953 16.5 5.03674C16.5 10.1567 11.9828 13.6098 9.14 14.5846C8.95395 14.6516 8.7307 14.6814 8.5 14.6814ZM5.19581 1.43488C3.22372 1.43488 1.61628 3.04977 1.61628 5.03674C1.61628 10.1195 6.50558 12.9474 8.22465 13.5353C8.3586 13.58 8.64884 13.58 8.78279 13.5353C10.4944 12.9474 15.3912 10.127 15.3912 5.03674C15.3912 3.04977 13.7837 1.43488 11.8116 1.43488C10.6805 1.43488 9.63116 1.96325 8.95395 2.8786C8.74558 3.16139 8.2693 3.16139 8.06093 2.8786C7.36884 1.95581 6.32698 1.43488 5.19581 1.43488Z"
+                fill="#f1600f"/>
+            </svg>
+            <span *ngIf="!product.isInFavorite">В избранное</span>
+            <span *ngIf="product.isInFavorite">В избранном</span>
+          </button>
+
+          <button class="button" [disabled]="!product.in_hand" *ngIf="!product.countInCart" (click)="addToCart()">В корзину</button>
+          <button class="button  button-transparent button-in-cart" *ngIf="product.countInCart" (click)="removeFromCart()">
+            <span>В корзине</span>
+            <span>Удалить</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="detail-desc">{{product.desc}}</div>
+
+    <div class="recommended-products">
+        <div class="carousel-header">
+          <div class="carousel-title">Рекомендуемые товары</div>
+          <div class="carousel-arrows">
+            <a class="move-backward" (click)="owlCar.prev()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M10.5561 15C10.4013 15 10.2465 14.9435 10.1243 14.8224L4.8127 9.55746C3.94915 8.70151 3.94915 7.29647 4.8127 6.44052L10.1243 1.17563C10.3606 0.941456 10.7516 0.941456 10.9879 1.17563C11.2241 1.40981 11.2241 1.7974 10.9879 2.03158L5.67624 7.29647C5.2852 7.68407 5.2852 8.31392 5.67624 8.70151L10.9879 13.9664C11.2241 14.2006 11.2241 14.5882 10.9879 14.8224C10.8657 14.9354 10.7109 15 10.5561 15Z"
+                  fill="#202B21"/>
+              </svg>
+            </a>
+            <a class="move-forward" (click)="owlCar.next()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5.44392 1C5.59871 1 5.75349 1.05652 5.87569 1.17765L11.1873 6.44254C12.0508 7.29849 12.0508 8.70353 11.1873 9.55948L5.87569 14.8244C5.63944 15.0585 5.2484 15.0585 5.01215 14.8244C4.7759 14.5902 4.7759 14.2026 5.01215 13.9684L10.3238 8.70353C10.7148 8.31593 10.7148 7.68608 10.3238 7.29849L5.01215 2.0336C4.7759 1.79942 4.7759 1.41182 5.01215 1.17765C5.13435 1.0646 5.28914 1 5.44392 1Z"
+                  fill="#202B21"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="carousel-items">
+          <owl-carousel-o [options]="customOptions" #owlCar>
+            <ng-template carouselSlide *ngFor="let product of recommendProducts">
+              <product-card [product]="product"></product-card>
+            </ng-template>
+          </owl-carousel-o>
+
+        </div>
+    </div>
+
+  </div>
+</div>

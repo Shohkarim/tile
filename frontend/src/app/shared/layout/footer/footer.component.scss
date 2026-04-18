@@ -1,0 +1,229 @@
+@import "../../../../assets/styles/variables";
+footer.footer {
+  padding-top: 39px;
+  padding-bottom: 50px;
+  background-color: #648F64;
+  //min-height: calc(100vh - 341px);
+
+  .container {
+    display: flex;
+
+    a.logo {
+      margin-right: 63px;
+    }
+
+    .footer-block {
+      margin-top: 11px;
+
+      .footer-head {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        color: $gray-text-color;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+      }
+
+      .footer-items {
+        ul {
+          list-style: none;
+          padding-left: 0;
+
+          li {
+            margin-bottom: 11px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            a {
+              font-size: 16px;
+              color: $gray-text-color;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      &.footer-menu {
+        margin-right: 57px;
+      }
+
+      &.footer-category {
+        margin-right: 34px;
+      }
+
+      &.footer-info {
+        margin-right: 63px;
+
+        .footer-head {
+          margin-bottom: 15px;
+        }
+
+        .footer-social {
+          display: flex;
+          align-items: center;
+          margin-bottom: 55px;
+
+          a {
+            margin-right: 12px;
+          }
+        }
+
+        .footer-payment {
+          display: grid;
+          grid-template-columns: repeat(3, 70px);
+          gap: 10px;
+          max-width: 230px;
+
+          .payment-item {
+            height: 35px;
+            background-position: top;
+          }
+        }
+      }
+
+      &.footer-contacts {
+        max-width: 253px;
+
+        .footer-contact {
+          font-size: 16px;
+          margin-bottom: 15px;
+          &:last-child{
+            margin-bottom: 0;
+          }
+          .footer-contact-head{
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            color: $gray-text-color;
+            margin-bottom: 6px;
+          }
+          .footer-contact-info{
+            color: $gray-text-color;
+
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 1023px) {
+  footer.footer{
+    .container{
+      flex-wrap: wrap;
+      align-items: center;
+      .footer-block {
+        &.footer-menu{
+          order: 1;
+        }
+        &.footer-category{
+          order: 4;
+        }
+        &.footer-info{
+          order: 2;
+        }
+        &.footer-contacts{
+          order: 3;
+          margin-left: 214px;
+        }
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 766px) {
+  footer.footer{
+    .container{
+
+      .footer-block {
+        .footer-menu{
+          order: 1;
+        }
+        .footer-category{
+          order: 2;
+        }
+        .footer-info{
+          order: 3;
+          margin-left: 214px;
+        }
+        .footer-contacts{
+          order: 3;
+          margin-left: 214px;
+        }
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 620px) {
+  footer.footer{
+    .container{
+      .footer-block {
+        &.footer-menu{
+          order: 1;
+        }
+        &.footer-category{
+          order: 2;
+          margin-left: 214px;
+        }
+        &.footer-info{
+          order: 3;
+          margin-left: 214px;
+        }
+        &.footer-contacts{
+          order: 4;
+          margin-left: 214px;
+        }
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 539px) {
+  footer.footer{
+    .container{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      a.logo{
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .footer-block {
+        margin-left: 0;
+        margin-right: 0;
+        &.footer-menu{
+          margin-left: 0;
+          margin-right: 0;
+          order: 1;
+        }
+        &.footer-category{
+          order: 2;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        &.footer-info{
+          order: 3;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        &.footer-contacts{
+          order: 4;
+          margin-top: 20px;
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+
+
+
+    }
+  }
+}
