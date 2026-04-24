@@ -1,10 +1,41 @@
 @import "../../../../assets/styles/auth.form";
-.login .container{
+
+.login .container {
   display: flex;
-  .page-image{
+
+  .page-image {
     margin-left: 49px;
-    img{
+
+    img {
       vertical-align: bottom;
+    }
+  }
+}
+
+
+@media screen and (max-width: 1023px) {
+  .login .container {
+    display: flex;
+    justify-content: center;
+
+    .page-image {
+      display: none;
+    }
+  }
+
+}
+
+@media screen and (max-width: 475px) {
+  .login .container {
+    .auth-form {
+      .auth-title{
+        font-size: 28px;
+      }
+      .auth-inputs {
+        .auth-input {
+          max-width: 375px;
+        }
+      }
     }
   }
 }

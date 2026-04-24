@@ -59,3 +59,27 @@
     }
   }
 }
+
+
+@media screen and (max-width: 475px) {
+  .auth-form {
+    margin-top: 20px;
+    .auth-title {
+      font-size: 28px;
+    }
+    .auth-inputs {
+      .auth-input {
+        input {
+          max-width: 422px;
+          width: 100%;
+        }
+      }
+    }
+    .auth-button{
+      button.button{
+        max-width: 422px;
+        width: 100%;
+      }
+    }
+  }
+}

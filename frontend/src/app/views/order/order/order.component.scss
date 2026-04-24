@@ -113,6 +113,37 @@
   }
 }
 
+@media (max-width: 768px) {
+  .order-popup{
+    padding: 100px 70px 120px;
+    background-image: none;
+    .order-popup-title{
+      @include head-lora-32;
+      font-size: 28px;
+    }
+    .order-popup-content div{}
+  }
+}
+@media (max-width: 539px) {
+  .order-popup{
+    padding: 50px 10px 100px;
+
+    .order-popup-close{
+      top: 10px;
+      right: 10px;
+    }
+
+    .order-popup-title{
+      @include head-lora-32;
+      margin-bottom: 40px;
+      font-size: 23px;
+    }
+    .order-popup-content div{
+      font-size: 17px;
+    }
+  }
+}
+
 @media (max-width: 455px) {
   .order{
     padding-top: 40px;
