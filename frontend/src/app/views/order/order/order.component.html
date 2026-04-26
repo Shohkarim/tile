@@ -138,7 +138,8 @@
             <div class="order-details-info-item-data">{{totalAmount + 1000 |currency}}</div>
           </div>
         </div>
-        <button class="button" (click)="createOrder()">Подтвердить заказ</button>
+        <button class="button" *ngIf="!isCardOnline" (click)="createOrder()">Подтвердить заказ</button>
+        <button class="button" *ngIf="isCardOnline" (click)="payOrder()">Оплатить</button>
 
       </div>
     </div>
