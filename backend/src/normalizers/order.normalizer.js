@@ -10,7 +10,7 @@ class OrderNormalizer extends BaseNormalizer {
                     quantity: item.quantity,
                     price: item.price,
                     total: item.total,
-
+                    discount: item.discount,
                 }
             }),
             deliveryCost: order.deliveryCost,

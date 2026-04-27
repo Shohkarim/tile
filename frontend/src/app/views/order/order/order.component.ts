@@ -157,7 +157,6 @@ export class OrderComponent implements OnInit {
         phone: this.orderForm.value.phone,
         paymentType: this.orderForm.value.paymentType,
         email: this.orderForm.value.email,
-
       };
 
       if(this.deliveryType === DeliveryType.delivery){
@@ -209,6 +208,66 @@ export class OrderComponent implements OnInit {
       this.orderForm.markAllAsTouched();
       this._snackBar.open('Заполните необходимые поля');
     }
+  }
+
+  payOrder() {
+    if (this.orderForm.valid && this.orderForm.value.firstName && this.orderForm.value.lastName && this.orderForm.value.phone &&
+      this.orderForm.value.paymentType && this.orderForm.value.email) {
+      const paramsObject: OrderType = {
+        deliveryType: this.deliveryType,
+        firstName: this.orderForm.value.firstName,
+        lastName: this.orderForm.value.lastName,
+        phone: this.orderForm.value.phone,
+        paymentType: this.orderForm.value.paymentType,
+        email: this.orderForm.value.email,
+
+      };
+
+      if (this.deliveryType === DeliveryType.delivery) {
+        if (this.orderForm.value.street) paramsObject.street = this.orderForm.value.street;
+        if (this.orderForm.value.apartment) paramsObject.apartment = this.orderForm.value.apartment;
+        if (this.orderForm.value.house) paramsObject.house = this.orderForm.value.house;
+        if (this.orderForm.value.entrance) paramsObject.entrance = this.orderForm.value.entrance;
+      }
+
+      if (this.orderForm.value.comment) {
+        paramsObject.comment = this.orderForm.value.comment;
+      }
+
+      this.orderService.createOrder(paramsObject)
+        .subscribe({
+          next: (data: any) => {
+
+            if (data?.error) {
+              throw new Error(data.message);
+            }
+
+            // 🔥 ВАЖНО: backend должен вернуть paymentUrl
+            if (data.paymentUrl) {
+              window.location.href = data.paymentUrl;
+              return;
+            }
+
+            this._snackBar.open('Не удалось получить ссылку оплаты');
+          },
+
+          error: (errorResponse: HttpErrorResponse) => {
+            if (errorResponse.error && errorResponse.error.message) {
+              this._snackBar.open(errorResponse.error.message);
+            } else {
+              this._snackBar.open('Ошибка оплаты');
+            }
+          }
+        });
+
+    } else {
+      this.orderForm.markAllAsTouched();
+      this._snackBar.open('Заполните необходимые поля');
+    }
+  }
+
+  get isCardOnline(): boolean {
+    return this.orderForm.get('paymentType')?.value === PaymentType.cardOnline;
   }
 
   closePopup(){
