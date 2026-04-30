@@ -1,3 +1,5 @@
+require('dotenv').config();
+console.log('EMAIL_USER =', process.env.EMAIL_USER);
 const express = require('express');
 const cors = require('cors');
 const categoryRoutes = require('./src/routes/category.routes');
@@ -86,5 +88,7 @@ MongoDBConnection.getConnection((error, connection) => {
     app.listen(config.port, () =>
         console.log(`Server started`)
     );
+
+
 })
 

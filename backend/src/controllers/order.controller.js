@@ -3,6 +3,7 @@ const OrderNormalizer = require("../normalizers/order.normalizer");
 const ValidationUtils = require("../utils/validation.utils");
 const CartService = require("../services/cart.service");
 const config = require("../config/config");
+const { sendOrderEmail } = require("../services/mail.service");
 
 class OrderController {
     static async getOrders(req, res) {
@@ -96,6 +97,11 @@ class OrderController {
                 console.log(orderResult);
                 return res.status(500).json({error: true, message: 'Не удалось оформить заказ'});
             }
+
+            sendOrderEmail(orderResult).catch(err => {
+                console.error('Ошибка отправки email:', err);
+            });
+
         } catch (e) {
             console.log(e);
             return res.status(500).json({error: true, message: 'Не удалось оформить заказ'});

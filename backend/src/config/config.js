@@ -8,7 +8,7 @@ const config = {
         dbHost: 'localhost',
         dbPort: 27017,
     },
-    deliveryCost: 10,
+    deliveryCost: 1000,
     deliveryTypes: {delivery: 'delivery', self: 'self'},
     paymentTypes: {cashToCourier: 'cashToCourier', cardOnline: 'cardOnline', cardToCourier: 'cardToCourier'},
     statuses: {new: 'new', pending: 'pending', delivery: 'delivery', cancelled: 'cancelled', success: 'success'}
